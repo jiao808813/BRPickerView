@@ -427,6 +427,10 @@
 
 // 遍历子视图，重新设置 frame（清空在 iOS14 上 UIPickerView 出现的内边距）
 - (void)setPickerAllSubViewsStyle:(UIView *)view {
+    NSString *systemVersion = [UIDevice currentDevice].systemVersion;
+    if (systemVersion.doubleValue >= 15.0) {
+        return;
+    }
     NSArray *subViews = view.subviews;
     if (subViews.count == 0 || [view isKindOfClass:[UILabel class]]) return;
     for (UIView *subView in subViews) {
